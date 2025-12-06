@@ -1,0 +1,94 @@
+{
+  "homeCollection": "Bizning kollektsiya",
+  "ourPartner": "Bizning hamkorlarimiz",
+  "viewProduct": "Mahsulotni ko'rish",
+  "learnMore": "Batafsil",
+  "home": "Bosh sahifa",
+  "shop": "Do'kon",
+  "search": "Qidiruv",
+  "language": "Til",
+
+  "banner": {
+    "title1": "Eng Zo'rni Kashf Qiling",
+    "title2": "Moda To‘plamlari",
+    "subtitle": "Yuqori sifatli kolleksiya",
+    "shopNow": "Hozir xarid qilish",
+    "seeCollection": "Kolleksiyani ko‘rish"
+  },
+
+  "categories": {
+    "title": "Bizning Kategoriyalarimiz",
+    "items": {
+      "headwear": "Bosh kiyim",
+      "upperwear": "Ust kiyim",
+      "bottomwear": "Pastki kiyim",
+      "footwear": "Oyoq kiyim"
+    }
+  },
+
+  "shopFilter": {
+    "showingResults": "{{from}}–{{to}} dan {{total}} ta natija ko‘rsatilmoqda",
+    "sortBy": "Saralash",
+    "options": {
+      "default": "Standart",
+      "popularity": "Mashhurlik bo‘yicha",
+      "priceAsc": "Narx: arzonidan qimmatgacha",
+      "priceDesc": "Narx: qimmatidan arzonigacha"
+    }
+  },
+
+  "footer": {
+    "contact": "Aloqa",
+    "email": "fashionstore@gmail.com",
+    "phone": "+998 93 123 45 67",
+    "locationTitle": "Manzil",
+    "location": "Jizzax, O‘zbekiston",
+    "brandName": "FASHION",
+    "rights": "Barcha huquqlar himoyalangan ©2024",
+    "instagram": "Instagram",
+    "telegram": "Telegram"
+  },
+
+  "cart": {
+    "shoppingCart": "Savatcha",
+    "itemsInCart": "Savatchangizdagi mahsulotlar",
+    "quantity": "Soni",
+    "remove": "O‘chirish",
+    "inStock": "Omborda bor",
+    "outOfStock": "Omborda yo‘q",
+    "orderSummary": "Buyurtma xulosasi",
+    "subtotal": "Jami",
+    "shippingEstimate": "Yetkazib berish narxi",
+    "taxEstimate": "Soliq",
+    "orderTotal": "Umumiy summa",
+    "checkout": "Buyurtma berish"
+  },
+
+  "checkout": {
+    "checkout": "Buyurtma berish",
+    "contactInformation": "Kontakt ma'lumotlari",
+    "emailAddress": "Email manzil",
+    "shippingInformation": "Yetkazib berish ma'lumotlari",
+    "firstName": "Ism",
+    "lastName": "Familiya",
+    "company": "Kompaniya",
+    "address": "Manzil",
+    "apartment": "Kvartira, uy, va hokazo",
+    "city": "Shahar",
+    "country": "Davlat",
+    "region": "Viloyat / Shtat",
+    "postalCode": "Pochta indeksi",
+    "phone": "Telefon",
+    "payment": "To‘lov",
+    "cardNumber": "Karta raqami",
+    "nameOnCard": "Karta egasining ismi",
+    "expirationDate": "Amal qilish muddati (MM/YY)",
+    "cvc": "CVC",
+    "confirmOrder": "Buyurtmani tasdiqlash",
+    "paymentMethods": {
+      "creditCard": "Kredit karta",
+      "paypal": "PayPal",
+      "etransfer": "eTransfer"
+    }
+  }
+}

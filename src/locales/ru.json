@@ -1,0 +1,94 @@
+{
+  "homeCollection": "Наша коллекция",
+  "ourPartner": "Наши партнёры",
+  "viewProduct": "Просмотреть товар",
+  "learnMore": "Узнать больше",
+  "home": "Главная",
+  "shop": "Магазин",
+  "search": "Поиск",
+  "language": "Язык",
+
+  "banner": {
+    "title1": "Откройте лучшее",
+    "title2": "Модные коллекции",
+    "subtitle": "Коллекция высокого качества",
+    "shopNow": "Купить сейчас",
+    "seeCollection": "Смотреть коллекцию"
+  },
+
+  "categories": {
+    "title": "Наши категории",
+    "items": {
+      "headwear": "Головные уборы",
+      "upperwear": "Верхняя одежда",
+      "bottomwear": "Нижняя одежда",
+      "footwear": "Обувь"
+    }
+  },
+
+  "shopFilter": {
+    "showingResults": "Показано {{from}}–{{to}} из {{total}} товаров",
+    "sortBy": "Сортировать по",
+    "options": {
+      "default": "По умолчанию",
+      "popularity": "Популярности",
+      "priceAsc": "Цена: от низкой к высокой",
+      "priceDesc": "Цена: от высокой к низкой"
+    }
+  },
+
+  "footer": {
+    "contact": "Контакты",
+    "email": "fashionstore@gmail.com",
+    "phone": "+998 93 123 45 67",
+    "locationTitle": "Локация",
+    "location": "Джизак, Узбекистан",
+    "brandName": "FASHION",
+    "rights": "Все права защищены ©2024",
+    "instagram": "Инстаграм",
+    "telegram": "Телеграм"
+  },
+
+  "cart": {
+    "shoppingCart": "Корзина",
+    "itemsInCart": "Товары в вашей корзине",
+    "quantity": "Количество",
+    "remove": "Удалить",
+    "inStock": "В наличии",
+    "outOfStock": "Нет в наличии",
+    "orderSummary": "Сводка заказа",
+    "subtotal": "Сумма",
+    "shippingEstimate": "Стоимость доставки",
+    "taxEstimate": "Налог",
+    "orderTotal": "Общая сумма",
+    "checkout": "Оформить заказ"
+  },
+
+  "checkout": {
+    "checkout": "Оформить заказ",
+    "contactInformation": "Контактная информация",
+    "emailAddress": "Электронная почта",
+    "shippingInformation": "Информация о доставке",
+    "firstName": "Имя",
+    "lastName": "Фамилия",
+    "company": "Компания",
+    "address": "Адрес",
+    "apartment": "Квартира, офис и т.д.",
+    "city": "Город",
+    "country": "Страна",
+    "region": "Регион / Штат",
+    "postalCode": "Почтовый индекс",
+    "phone": "Телефон",
+    "payment": "Оплата",
+    "cardNumber": "Номер карты",
+    "nameOnCard": "Имя на карте",
+    "expirationDate": "Срок действия (MM/YY)",
+    "cvc": "CVC",
+    "confirmOrder": "Подтвердить заказ",
+    "paymentMethods": {
+      "creditCard": "Кредитная карта",
+      "paypal": "PayPal",
+      "etransfer": "eTransfer"
+    }
+  }
+}

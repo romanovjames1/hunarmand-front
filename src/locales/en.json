@@ -1,0 +1,94 @@
+{
+  "homeCollection": "Our collection",
+  "ourPartner": "Our Partners",
+  "viewProduct": "View product",
+  "learnMore": "Learn more",
+  "home": "Home",
+  "shop": "Shop",
+  "search": "Search",
+  "language": "Language",
+
+  "banner": {
+    "title1": "Discover the Best",
+    "title2": "Fashion Collection",
+    "subtitle": "The High-Quality Collection",
+    "shopNow": "Shop Now",
+    "seeCollection": "See Collection"
+  },
+
+  "categories": {
+    "title": "Our Categories",
+    "items": {
+      "headwear": "Headwear",
+      "upperwear": "Upperwear",
+      "bottomwear": "Bottomwear",
+      "footwear": "Footwear"
+    }
+  },
+
+  "shopFilter": {
+    "showingResults": "Showing {{from}}–{{to}} of {{total}} results",
+    "sortBy": "Sort by",
+    "options": {
+      "default": "Default",
+      "popularity": "Popularity",
+      "priceAsc": "Price: low to high",
+      "priceDesc": "Price: high to low"
+    }
+  },
+
+  "footer": {
+    "contact": "Contact",
+    "email": "fashionstore@gmail.com",
+    "phone": "+998 93 123 45 67",
+    "locationTitle": "Location",
+    "location": "Jizzax, Uzbekistan",
+    "brandName": "FASHION",
+    "rights": "All rights reserved ©2024",
+    "instagram": "Instagram",
+    "telegram": "Telegram"
+  },
+
+  "cart": {
+    "shoppingCart": "Shopping Cart",
+    "itemsInCart": "Items in your cart",
+    "quantity": "Quantity",
+    "remove": "Remove",
+    "inStock": "In stock",
+    "outOfStock": "Out of stock",
+    "orderSummary": "Order summary",
+    "subtotal": "Subtotal",
+    "shippingEstimate": "Shipping estimate",
+    "taxEstimate": "Taxes",
+    "orderTotal": "Order total",
+    "checkout": "Checkout"
+  },
+
+  "checkout": {
+    "checkout": "Checkout",
+    "contactInformation": "Contact information",
+    "emailAddress": "Email address",
+    "shippingInformation": "Shipping information",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "company": "Company",
+    "address": "Address",
+    "apartment": "Apartment, suite, etc.",
+    "city": "City",
+    "country": "Country",
+    "region": "State / Province",
+    "postalCode": "Postal code",
+    "phone": "Phone",
+    "payment": "Payment",
+    "cardNumber": "Card number",
+    "nameOnCard": "Name on card",
+    "expirationDate": "Expiration date (MM/YY)",
+    "cvc": "CVC",
+    "confirmOrder": "Confirm Order",
+    "paymentMethods": {
+      "creditCard": "Credit card",
+      "paypal": "PayPal",
+      "etransfer": "eTransfer"
+    }
+  }
+}
