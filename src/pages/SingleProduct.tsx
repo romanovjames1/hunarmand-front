@@ -45,14 +45,14 @@ const SingleProduct = () => {
   useEffect(() => {
     const fetchSingleProduct = async () => {
       const response = await fetch(
-        `http://localhost:3000/product/${params.id}`
+        `https://hunarmand.qaxramonov.uz/product/${params.id}`
       );
       const data = await response.json();
       setSingleProduct(data);
     };
 
     const fetchProducts = async () => {
-      const response = await fetch("http://localhost:3000/product");
+      const response = await fetch("https://hunarmand.qaxramonov.uz/product");
       const data = await response.json();
       setProducts(data.data || []);
     };

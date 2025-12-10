@@ -56,14 +56,20 @@ const AdminProducts: React.FC<Props> = ({ token }) => {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const prodRes = await axios.get("http://localhost:3000/product", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const prodRes = await axios.get(
+        "https://hunarmand.qaxramonov.uz/product",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       setProducts(prodRes.data.data);
 
-      const catRes = await axios.get("http://localhost:3000/category", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const catRes = await axios.get(
+        "https://hunarmand.qaxramonov.uz/category",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       setCategories(catRes.data.data);
     } catch (err) {
       console.error(err);
@@ -109,7 +115,7 @@ const AdminProducts: React.FC<Props> = ({ token }) => {
 
       if (editingId) {
         await axios.put(
-          `http://localhost:3000/product/${editingId}`,
+          `https://hunarmand.qaxramonov.uz/product/${editingId}`,
           formData,
           {
             headers: {
@@ -120,7 +126,7 @@ const AdminProducts: React.FC<Props> = ({ token }) => {
         );
         toast.success("Product updated");
       } else {
-        await axios.post("http://localhost:3000/product", formData, {
+        await axios.post("https://hunarmand.qaxramonov.uz/product", formData, {
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "multipart/form-data",
@@ -160,7 +166,7 @@ const AdminProducts: React.FC<Props> = ({ token }) => {
   const handleDelete = async (id: string) => {
     if (!confirm("Are you sure you want to delete this product?")) return;
     try {
-      await axios.delete(`http://localhost:3000/product/${id}`, {
+      await axios.delete(`https://hunarmand.qaxramonov.uz/product/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setProducts(products.filter((p) => p._id !== id));

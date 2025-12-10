@@ -16,10 +16,13 @@ const AdminLogin: React.FC<Props> = ({ setIsLoggedIn, setToken }) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axios.post("http://localhost:3000/admin-auth/login", {
-        username,
-        password,
-      });
+      const res = await axios.post(
+        "https://hunarmand.qaxramonov.uz/admin-auth/login",
+        {
+          username,
+          password,
+        }
+      );
       setToken(res.data.accessToken);
       setIsLoggedIn(true);
       toast.success("Logged in successfully");

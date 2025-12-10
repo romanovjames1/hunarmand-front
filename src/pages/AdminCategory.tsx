@@ -29,7 +29,7 @@ const AdminCategory: React.FC<Props> = ({ token }) => {
   const fetchCategories = async () => {
     setLoading(true);
     try {
-      const res = await axios.get("http://localhost:3000/category", {
+      const res = await axios.get("https://hunarmand.qaxramonov.uz/category", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setCategories(res.data.data);
@@ -44,12 +44,16 @@ const AdminCategory: React.FC<Props> = ({ token }) => {
     setLoading(true);
     try {
       if (editingId) {
-        await axios.put(`http://localhost:3000/category/${editingId}`, form, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        await axios.put(
+          `https://hunarmand.qaxramonov.uz/category/${editingId}`,
+          form,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
         toast.success("Category updated");
       } else {
-        await axios.post("http://localhost:3000/category", form, {
+        await axios.post("https://hunarmand.qaxramonov.uz/category", form, {
           headers: { Authorization: `Bearer ${token}` },
         });
         toast.success("Category added");
@@ -71,7 +75,7 @@ const AdminCategory: React.FC<Props> = ({ token }) => {
   const handleDelete = async (id: string) => {
     if (!confirm("Are you sure you want to delete this category?")) return;
     try {
-      await axios.delete(`http://localhost:3000/category/${id}`, {
+      await axios.delete(`https://hunarmand.qaxramonov.uz/category/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setCategories(categories.filter((c) => c._id !== id));

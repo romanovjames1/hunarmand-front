@@ -16,7 +16,7 @@ const AdminSettings: React.FC<Props> = ({ token }) => {
     setLoading(true);
     try {
       await axios.put(
-        "http://localhost:3000/admin-auth/update",
+        "https://hunarmand.qaxramonov.uz/admin-auth/update",
         { username, password },
         { headers: { Authorization: `Bearer ${token}` } }
       );

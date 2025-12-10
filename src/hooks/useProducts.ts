@@ -23,7 +23,7 @@ export const useProducts = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/product");
+        const res = await axios.get("https://hunarmand.qaxramonov.uz/product");
         setProducts(res.data.data || []);
       } catch (err) {
         console.error("Failed to fetch products", err);
