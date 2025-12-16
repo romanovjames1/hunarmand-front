@@ -477,80 +477,80 @@ const AdminCategory: React.FC<Props> = ({ token }) => {
       {loading ? (
         <CircleLoader size={70} color="#8B5E3C" speedMultiplier={1.2} />
       ) : (
-        // <table className="w-full border border-gray-300">
-        //   <thead>
-        //     <tr className="bg-gray-200 text-left">
-        //       <th className="border p-2">UZ</th>
-        //       <th className="border p-2">RU</th>
-        //       <th className="border p-2">EN</th>
-        //       <th className="border p-2 text-center">Actions</th>
-        //     </tr>
-        //   </thead>
-        //   <tbody>
-        //     {categories.map((cat) => (
-        //       <tr key={cat._id}>
-        //         <td className="border p-2">{cat.title_uz}</td>
-        //         <td className="border p-2">{cat.title_ru}</td>
-        //         <td className="border p-2">{cat.title_en}</td>
-        //         <td className="border p-2 flex justify-center gap-2">
-        //           <button
-        //             onClick={() => handleEdit(cat)}
-        //             className="bg-blue-500 text-white px-3 py-1"
-        //           >
-        //             Edit
-        //           </button>
-        //           <button
-        //             onClick={() => handleDelete(cat._id)}
-        //             className="bg-red-500 text-white px-3 py-1"
-        //           >
-        //             Delete
-        //           </button>
-        //         </td>
-        //       </tr>
-        //     ))}
-        //   </tbody>
-        // </table>
-        <table className="w-full border border-gray-300 bg-white shadow-sm">
+        <table className="w-full border border-gray-300">
           <thead>
             <tr className="bg-gray-200 text-left">
-              <th className="border p-2">Title (UZ)</th>
-              <th className="border p-2">Title (RU)</th>
-              <th className="border p-2">Title (EN)</th>
+              <th className="border p-2">UZ</th>
+              <th className="border p-2">RU</th>
+              <th className="border p-2">EN</th>
               <th className="border p-2 text-center">Actions</th>
             </tr>
           </thead>
           <tbody>
             {categories.map((cat) => (
-              <tr key={cat._id} className="hover:bg-gray-50 transition-colors">
-                <td className="border p-2 font-medium">
-                  {cat.title_uz || "---"}
-                </td>
-                <td className="border p-2 text-gray-600">
-                  {cat.title_ru || "---"}
-                </td>
-                <td className="border p-2 text-gray-600">
-                  {cat.title_en || "---"}
-                </td>
-                <td className="border p-2">
-                  <div className="flex justify-center gap-2">
-                    <button
-                      onClick={() => handleEdit(cat)}
-                      className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition"
-                    >
-                      Edit
-                    </button>
-                    <button
-                      onClick={() => handleDelete(cat._id)}
-                      className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition"
-                    >
-                      Delete
-                    </button>
-                  </div>
+              <tr key={cat._id}>
+                <td className="border p-2">{cat.title_uz}</td>
+                <td className="border p-2">{cat.title_ru}</td>
+                <td className="border p-2">{cat.title_en}</td>
+                <td className="border p-2 flex justify-center gap-2">
+                  <button
+                    onClick={() => handleEdit(cat)}
+                    className="bg-blue-500 text-white px-3 py-1"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => handleDelete(cat._id)}
+                    className="bg-red-500 text-white px-3 py-1"
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+        // <table className="w-full border border-gray-300 bg-white shadow-sm">
+        //   <thead>
+        //     <tr className="bg-gray-200 text-left">
+        //       <th className="border p-2">Title (UZ)</th>
+        //       <th className="border p-2">Title (RU)</th>
+        //       <th className="border p-2">Title (EN)</th>
+        //       <th className="border p-2 text-center">Actions</th>
+        //     </tr>
+        //   </thead>
+        //   <tbody>
+        //     {categories.map((cat) => (
+        //       <tr key={cat._id} className="hover:bg-gray-50 transition-colors">
+        //         <td className="border p-2 font-medium">
+        //           {cat.title_uz || "---"}
+        //         </td>
+        //         <td className="border p-2 text-gray-600">
+        //           {cat.title_ru || "---"}
+        //         </td>
+        //         <td className="border p-2 text-gray-600">
+        //           {cat.title_en || "---"}
+        //         </td>
+        //         <td className="border p-2">
+        //           <div className="flex justify-center gap-2">
+        //             <button
+        //               onClick={() => handleEdit(cat)}
+        //               className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition"
+        //             >
+        //               Edit
+        //             </button>
+        //             <button
+        //               onClick={() => handleDelete(cat._id)}
+        //               className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition"
+        //             >
+        //               Delete
+        //             </button>
+        //           </div>
+        //         </td>
+        //       </tr>
+        //     ))}
+        //   </tbody>
+        // </table>
       )}
     </div>
   );
