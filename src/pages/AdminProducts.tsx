@@ -652,7 +652,7 @@ const AdminProducts: React.FC<Props> = ({ token }) => {
             </option>
           ))}
         </select> */}
-
+{/* 
         <select
           name="category"
           value={form.category?._id || ""}
@@ -671,8 +671,31 @@ const AdminProducts: React.FC<Props> = ({ token }) => {
               {cat.title_en || "No EN"}
             </option>
           ))}
-        </select>
+        </select> */}
 
+<select
+  name="category"
+  // Look for the _id within the nested category object
+  value={form.category?._id || ""}
+  onChange={(e) => {
+    // Find the full category object from your state array
+    const selectedCat = categories.find((c) => c._id === e.target.value);
+    setForm((prev) => ({
+      ...prev,
+      category: selectedCat, // Save the full object including _id
+    }));
+  }}
+  required
+  className="border p-2 bg-white"
+>
+  <option value="">Select Category *</option>
+  {categories.map((cat) => (
+    <option key={cat._id} value={cat._id}>
+      {/* Show all translations in the dropdown so you pick correctly */}
+      {cat.title_uz || cat.title} | {cat.title_ru || '---'} | {cat.title_en || '---'}
+    </option>
+  ))}
+</select>
         <div className="grid grid-cols-2 gap-2">
           <input
             type="text"
