@@ -764,17 +764,23 @@ const AdminProducts: React.FC<Props> = ({ token }) => {
                     ${p.price}
                   </td>
                   <td className="border p-2">
-                    <div className="flex flex-col text-xs gap-1">
-                      <span className="font-bold text-blue-700">
-                        UZ: {p.category?.title_uz || "---"}
+                    {p.category ? (
+                      <div className="flex flex-col text-[10px] leading-tight">
+                        <span className="font-bold text-blue-600">
+                          UZ: {p.category.title_uz || p.category.title || "---"}
+                        </span>
+                        <span className="text-gray-500">
+                          RU: {p.category.title_ru || "---"}
+                        </span>
+                        <span className="text-gray-500">
+                          EN: {p.category.title_en || "---"}
+                        </span>
+                      </div>
+                    ) : (
+                      <span className="text-red-400 text-xs italic">
+                        Uncategorized
                       </span>
-                      <span className="text-gray-500">
-                        RU: {p.category?.title_ru || "---"}
-                      </span>
-                      <span className="text-gray-500">
-                        EN: {p.category?.title_en || "---"}
-                      </span>
-                    </div>
+                    )}
                   </td>
                   <td className="border p-2 text-center">
                     <div className="flex justify-center gap-2">
