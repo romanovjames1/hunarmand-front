@@ -154,7 +154,6 @@
 // };
 
 // export default AdminCategory;
-
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -162,10 +161,9 @@ import { CircleLoader } from "react-spinners";
 
 type Category = {
   _id: string;
-  titleUz: string; // Added Uz
-  titleRu: string; // Added Ru
-  titleEn: string; // Added En
-  title: string; // Keeping original for compatibility
+  title_uz: string; // Updated key
+  title_ru: string; // Updated key
+  title_en: string; // Updated key
   language: string;
 };
 
@@ -177,9 +175,9 @@ const AdminCategory: React.FC<Props> = ({ token }) => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState<Partial<Category>>({
-    titleUz: "",
-    titleRu: "",
-    titleEn: "",
+    title_uz: "",
+    title_ru: "",
+    title_en: "",
     language: "UZ",
   });
   const [editingId, setEditingId] = useState<string | null>(null);
@@ -220,8 +218,8 @@ const AdminCategory: React.FC<Props> = ({ token }) => {
         });
         toast.success("Category added");
       }
-      // Reset all title fields
-      setForm({ titleUz: "", titleRu: "", titleEn: "", language: "UZ" });
+      // Reset using the specific snake_case keys
+      setForm({ title_uz: "", title_ru: "", title_en: "", language: "UZ" });
       setEditingId(null);
       fetchCategories();
     } catch {
@@ -231,7 +229,12 @@ const AdminCategory: React.FC<Props> = ({ token }) => {
   };
 
   const handleEdit = (cat: Category) => {
-    setForm(cat);
+    setForm({
+      title_uz: cat.title_uz,
+      title_ru: cat.title_ru,
+      title_en: cat.title_en,
+      language: cat.language,
+    });
     setEditingId(cat._id);
   };
 
@@ -255,32 +258,29 @@ const AdminCategory: React.FC<Props> = ({ token }) => {
         onSubmit={handleSubmit}
         className="flex flex-col gap-2 mb-5 max-w-md"
       >
-        {/* Uzbek Input */}
         <input
           type="text"
-          placeholder="Uzbek Title *"
-          value={form.titleUz}
-          onChange={(e) => setForm({ ...form, titleUz: e.target.value })}
+          placeholder="Uzbek Title (title_uz) *"
+          value={form.title_uz}
+          onChange={(e) => setForm({ ...form, title_uz: e.target.value })}
           required
           className="border p-2"
         />
 
-        {/* Russian Input */}
         <input
           type="text"
-          placeholder="Russian Title *"
-          value={form.titleRu}
-          onChange={(e) => setForm({ ...form, titleRu: e.target.value })}
+          placeholder="Russian Title (title_ru) *"
+          value={form.title_ru}
+          onChange={(e) => setForm({ ...form, title_ru: e.target.value })}
           required
           className="border p-2"
         />
 
-        {/* English Input */}
         <input
           type="text"
-          placeholder="English Title *"
-          value={form.titleEn}
-          onChange={(e) => setForm({ ...form, titleEn: e.target.value })}
+          placeholder="English Title (title_en) *"
+          value={form.title_en}
+          onChange={(e) => setForm({ ...form, title_en: e.target.value })}
           required
           className="border p-2"
         />
@@ -313,7 +313,7 @@ const AdminCategory: React.FC<Props> = ({ token }) => {
           <tbody>
             {categories.map((cat) => (
               <tr key={cat._id}>
-                <td className="border p-2">{cat.titleUz || cat.title}</td>
+                <td className="border p-2">{cat.title_uz}</td>
                 <td className="border p-2">{cat.language}</td>
                 <td className="border p-2 flex gap-2">
                   <button
