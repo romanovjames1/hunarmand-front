@@ -697,124 +697,74 @@ const AdminProducts: React.FC<Props> = ({ token }) => {
           {editingId ? "UPDATE PRODUCT" : "ADD PRODUCT"}
         </button>
       </form>
-
-/* ... existing imports and types ... */
-
-// Replace the table section in your code with this:
-
-{loading ? (
-  <CircleLoader size={70} color="#8B5E3C" />
-) : (
-  <table className="w-full border border-gray-300 bg-white mt-5">
-    <thead>
-      <tr className="bg-gray-200 text-left">
-        <th className="border p-2 text-center">Image</th>
-        <th className="border p-2">Title (UZ)</th>
-        <th className="border p-2">Title (RU)</th>
-        <th className="border p-2">Title (EN)</th>
-        <th className="border p-2 text-center">Price</th>
-        <th className="border p-2">Category</th>
-        <th className="border p-2 text-center">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      {products.map((p) => {
-        // Helper to find titles quickly
-        const getTitle = (lang: string) => 
-          p.translations?.find((t: any) => t.language === lang)?.title || "---";
-
-        return (
-          <tr key={p._id} className="hover:bg-gray-50">
-            <td className="border p-2">
-              <img 
-                src={p.thumbnail} 
-                alt="" 
-                className="w-16 h-16 object-cover mx-auto rounded shadow-sm" 
-              />
-            </td>
-            <td className="border p-2 font-medium">{getTitle("UZ")}</td>
-            <td className="border p-2 text-gray-600">{getTitle("RU")}</td>
-            <td className="border p-2 text-gray-600">{getTitle("EN")}</td>
-            <td className="border p-2 text-center font-bold text-green-600">
-              ${p.price}
-            </td>
-            <td className="border p-2">
-              <span className="bg-gray-100 px-2 py-1 rounded text-sm">
-                {p.category?.title || "Uncategorized"}
-              </span>
-            </td>
-            <td className="border p-2 text-center">
-              <div className="flex justify-center gap-2">
-                <button 
-                  onClick={() => handleEdit(p)} 
-                  className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition"
-                >
-                  Edit
-                </button>
-                <button 
-                  onClick={() => handleDelete(p._id)} 
-                  className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition"
-                >
-                  Delete
-                </button>
-              </div>
-            </td>
-          </tr>
-        );
-      })}
-    </tbody>
-  </table>
-)}
-      {/* {loading ? (
+      /* ... existing imports and types ... */ // Replace the table section in
+      your code with this:
+      {loading ? (
         <CircleLoader size={70} color="#8B5E3C" />
       ) : (
-        <table className="w-full border border-gray-300 bg-white">
+        <table className="w-full border border-gray-300 bg-white mt-5">
           <thead>
-            <tr className="bg-gray-200">
-              <th className="border p-2">Image</th>
+            <tr className="bg-gray-200 text-left">
+              <th className="border p-2 text-center">Image</th>
               <th className="border p-2">Title (UZ)</th>
-              <th className="border p-2">Price</th>
+              <th className="border p-2">Title (RU)</th>
+              <th className="border p-2">Title (EN)</th>
+              <th className="border p-2 text-center">Price</th>
               <th className="border p-2">Category</th>
-              <th className="border p-2">Actions</th>
+              <th className="border p-2 text-center">Actions</th>
             </tr>
           </thead>
           <tbody>
-            {products.map((p) => (
-              <tr key={p._id} className="text-center">
-                <td className="border p-2">
-                  <img
-                    src={p.thumbnail}
-                    alt=""
-                    className="w-16 h-16 object-cover mx-auto"
-                  />
-                </td>
-                <td className="border p-2">
-                  {p.translations?.find((t: any) => t.language === "UZ")
-                    ?.title || "No Title"}
-                </td>
-                <td className="border p-2">${p.price}</td>
-                <td className="border p-2">{p.category?.title}</td>
-                <td className="border p-2">
-                  <button
-                    onClick={() => handleEdit(p)}
-                    className="bg-blue-500 text-white px-3 py-1 mr-2 rounded"
-                  >
-                    Edit
-                  </button>
-                  <button
-                    onClick={() => handleDelete(p._id)}
-                    className="bg-red-500 text-white px-3 py-1 rounded"
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
+            {products.map((p) => {
+              // Helper to find titles quickly
+              const getTitle = (lang: string) =>
+                p.translations?.find((t: any) => t.language === lang)?.title ||
+                "---";
+
+              return (
+                <tr key={p._id} className="hover:bg-gray-50">
+                  <td className="border p-2">
+                    <img
+                      src={p.thumbnail}
+                      alt=""
+                      className="w-16 h-16 object-cover mx-auto rounded shadow-sm"
+                    />
+                  </td>
+                  <td className="border p-2 font-medium">{getTitle("UZ")}</td>
+                  <td className="border p-2 text-gray-600">{getTitle("RU")}</td>
+                  <td className="border p-2 text-gray-600">{getTitle("EN")}</td>
+                  <td className="border p-2 text-center font-bold text-green-600">
+                    ${p.price}
+                  </td>
+                  <td className="border p-2">
+                    <span className="bg-gray-100 px-2 py-1 rounded text-sm">
+                      {p.category?.title || "Uncategorized"}
+                    </span>
+                  </td>
+                  <td className="border p-2 text-center">
+                    <div className="flex justify-center gap-2">
+                      <button
+                        onClick={() => handleEdit(p)}
+                        className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => handleDelete(p._id)}
+                        className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       )}
     </div>
   );
-}; */}
+};
 
 export default AdminProducts;
