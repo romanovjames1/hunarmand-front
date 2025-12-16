@@ -634,7 +634,7 @@ const AdminProducts: React.FC<Props> = ({ token }) => {
           />
         </div>
 
-        <select
+        {/* <select
           value={form.category?._id || ""}
           onChange={(e) =>
             setForm({
@@ -649,6 +649,26 @@ const AdminProducts: React.FC<Props> = ({ token }) => {
           {categories.map((cat) => (
             <option key={cat._id} value={cat._id}>
               {cat.title}
+            </option>
+          ))}
+        </select> */}
+
+        <select
+          name="category"
+          value={form.category?._id || ""}
+          onChange={(e) => {
+            const cat = categories.find((c) => c._id === e.target.value);
+            setForm((prev) => ({ ...prev, category: cat }));
+          }}
+          required
+          className="border p-2 bg-white"
+        >
+          <option value="">Select Category *</option>
+          {categories.map((cat) => (
+            <option key={cat._id} value={cat._id}>
+              {/* Showing UZ title, with others in brackets for clarity */}
+              {cat.title_uz || cat.title} | {cat.title_ru || "No RU"} |{" "}
+              {cat.title_en || "No EN"}
             </option>
           ))}
         </select>
