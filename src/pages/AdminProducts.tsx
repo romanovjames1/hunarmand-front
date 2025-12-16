@@ -697,8 +697,7 @@ const AdminProducts: React.FC<Props> = ({ token }) => {
           {editingId ? "UPDATE PRODUCT" : "ADD PRODUCT"}
         </button>
       </form>
-      /* ... existing imports and types ... */ // Replace the table section in
-      your code with this:
+
       {loading ? (
         <CircleLoader size={70} color="#8B5E3C" />
       ) : (
