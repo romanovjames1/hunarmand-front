@@ -347,8 +347,9 @@ import { CircleLoader } from "react-spinners";
 
 type Category = {
   _id: string;
-  title: string;
-  language: string;
+  title_uz: string;
+  title_ru: string;
+  title_en: string;
 };
 
 type Product = {
