@@ -95,7 +95,7 @@ interface Props {
 }
 
 const ProductGrid: React.FC<Props> = ({ products = [] }) => {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   // Match i18next language to your DB "UZ", "RU", "EN"
   const currentLang = i18n.language.toUpperCase();
 
@@ -103,6 +103,7 @@ const ProductGrid: React.FC<Props> = ({ products = [] }) => {
   // If the array is empty, it shows the "no_products" message you see now
   if (!products || products.length === 0)
     return <p className="text-center w-full mt-10">{t("no_products")}</p>;
+
   return (
     <div className="max-w-screen-2xl flex flex-wrap justify-between items-center gap-y-8 mx-auto mt-12 px-5">
       {products.map((product) => {
