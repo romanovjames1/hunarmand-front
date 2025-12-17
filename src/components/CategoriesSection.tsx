@@ -2,7 +2,7 @@ import CategoryItem from "./CategoryItem";
 import { useTranslation } from "react-i18next";
 
 const CategoriesSection = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const categories = [
     {
