@@ -1,25 +1,25 @@
 // import React from "react";
 // import ProductItem from "./ProductItem";
 
-type Product = {
-  _id: string;
-  title: string;
-  price: number;
-  thumbnail: string;
-  images: string[];
-  category: {
-    _id: string;
-    title_uz: string;
-    title_ru: string;
-    title_en: string;
-  };
-  stockQuantity: number;
-  popularity?: number;
-};
+// type Product = {
+//   _id: string;
+//   title: string;
+//   price: number;
+//   thumbnail: string;
+//   images: string[];
+//   category: {
+//     _id: string;
+//     title_uz: string;
+//     title_ru: string;
+//     title_en: string;
+//   };
+//   stockQuantity: number;
+//   popularity?: number;
+// };
 
-interface Props {
-  products?: Product[];
-}
+// interface Props {
+//   products?: Product[];
+// }
 
 // const ProductGrid: React.FC<Props> = ({ products = [] }) => {
 //   if (!products.length)
@@ -68,12 +68,29 @@ import React from "react";
 import ProductItem from "./ProductItem";
 import { useTranslation } from "react-i18next"; // Use the hook you found
 
-// ... types (make sure Translation array is included) ...
+type Product = {
+  _id: string;
+  title: string;
+  price: number;
+  thumbnail: string;
+  images: string[];
+  category: {
+    _id: string;
+    title_uz: string;
+    title_ru: string;
+    title_en: string;
+  };
+  stockQuantity: number;
+  popularity?: number;
+};
+
+interface Props {
+  products?: Product[];
+}
 
 const ProductGrid: React.FC<Props> = ({ products = [] }) => {
   const { i18n } = useTranslation();
 
-  // Normalize language to match your DB ("UZ", "RU", "EN")
   const currentLang = i18n.language.toUpperCase();
 
   if (!products.length)
