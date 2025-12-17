@@ -128,44 +128,19 @@ const SingleProduct = () => {
 
         <div className="w-full flex flex-col gap-5 mt-9">
           <div className="flex flex-col gap-2">
+            {/* Dynamic Title from Database */}
             <h1 className="text-4xl">
-              {activeTranslation?.title || "Loading..."}
+              {activeTranslation?.title || "Yuklanmoqda..."}
             </h1>
+
             <div className="flex justify-between items-center">
+              {/* Dynamic Category */}
               <p className="text-base text-secondaryBrown">{categoryTitle}</p>
               <p className="text-base font-bold">${singleProduct?.price}</p>
             </div>
           </div>
 
-          <div className="flex flex-col gap-2">
-            <SelectInputUpgrade
-              selectList={[
-                { id: "xs", value: "XS" },
-                { id: "sm", value: "SM" },
-                { id: "m", value: "M" },
-                { id: "lg", value: "LG" },
-                { id: "xl", value: "XL" },
-                { id: "2xl", value: "2XL" },
-              ]}
-              value={size}
-              onChange={(e: any) => setSize(e.target.value)}
-            />
-            <SelectInputUpgrade
-              selectList={[
-                { id: "black", value: "BLACK" },
-                { id: "red", value: "RED" },
-                { id: "blue", value: "BLUE" },
-                { id: "white", value: "WHITE" },
-              ]}
-              value={color}
-              onChange={(e: any) => setColor(e.target.value)}
-            />
-            <QuantityInputUpgrade
-              value={quantity}
-              onChange={(e: any) => setQuantity(parseInt(e.target.value))}
-            />
-          </div>
-
+          {/* Button with Static Translation */}
           <div className="flex flex-col gap-3">
             <Button
               mode="brown"
@@ -174,8 +149,11 @@ const SingleProduct = () => {
             />
           </div>
 
+          {/* Description with Static Title and Dynamic Content */}
           <Dropdown dropdownTitle={t("product.description")}>
-            {activeTranslation?.description}
+            <p className="text-gray-600 leading-relaxed">
+              {activeTranslation?.description}
+            </p>
           </Dropdown>
         </div>
       </div>

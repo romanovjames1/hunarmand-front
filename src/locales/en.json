@@ -61,7 +61,9 @@
     "shippingEstimate": "Shipping estimate",
     "taxEstimate": "Taxes",
     "orderTotal": "Order total",
-    "checkout": "Checkout"
+    "checkout": "Checkout",
+    "addToCart": "Add To Cart",
+    "addedSuccess": "Successfully added"
   },
 
   "checkout": {
@@ -90,5 +92,10 @@
       "paypal": "PayPal",
       "etransfer": "eTransfer"
     }
+  },
+
+  "product": {
+    "description": "Description",
+    "details": "Product description"
   }
 }

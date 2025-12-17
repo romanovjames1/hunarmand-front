@@ -61,7 +61,10 @@
     "shippingEstimate": "Стоимость доставки",
     "taxEstimate": "Налог",
     "orderTotal": "Общая сумма",
-    "checkout": "Оформить заказ"
+    "checkout": "Оформить заказ",
+    "addToCart": "Добавить в корзину",
+    "addedSuccess": "Товар добавлен в корзину",
+    "shoppingCart": "Корзина"
   },
 
   "checkout": {
@@ -90,5 +93,9 @@
       "paypal": "PayPal",
       "etransfer": "eTransfer"
     }
+  },
+  "product": {
+    "description": "Описание",
+    "details": "Детали продукта"
   }
 }

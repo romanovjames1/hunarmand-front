@@ -61,7 +61,10 @@
     "shippingEstimate": "Yetkazib berish narxi",
     "taxEstimate": "Soliq",
     "orderTotal": "Umumiy summa",
-    "checkout": "Buyurtma berish"
+    "checkout": "Buyurtma berish",
+    "addToCart": "Savatga qo'shish",
+    "addedSuccess": "Mahsulot savatga qo'shildi",
+    "shoppingCart": "Savatcha"
   },
 
   "checkout": {
@@ -90,5 +93,9 @@
       "paypal": "PayPal",
       "etransfer": "eTransfer"
     }
+  },
+  "product": {
+    "description": "Tavsif",
+    "details": "Mahsulot tafsilotlari"
   }
 }
