@@ -168,12 +168,12 @@ const ProductGridWrapper = ({
 
       try {
         const response = await customFetch("/product");
-        // Ensure we are getting the nested array from the API response
+        // Grab the data array from the nested response
         const allProducts = response.data.data || [];
 
         let processedProducts = [...allProducts];
 
-        // 1. UPDATED SEARCH: Search inside the translations array
+        // FIX 1: Search inside the translations array
         if (query) {
           processedProducts = processedProducts.filter((product: any) => {
             const translation = product.translations?.find(
@@ -185,12 +185,13 @@ const ProductGridWrapper = ({
           });
         }
 
-        // 2. UPDATED CATEGORY FILTER: Use title_uz, title_ru, or title_en
-        if (category) {
+        // FIX 2: Filter category using the new multi-language keys
+        if (category && category !== "all") {
           processedProducts = processedProducts.filter((product: any) => {
             const cat = product.category;
             if (!cat) return false;
 
+            // Match the filter to the current site language
             const catTitle =
               currentLang === "UZ"
                 ? cat.title_uz
@@ -202,33 +203,27 @@ const ProductGridWrapper = ({
           });
         }
 
-        if (totalProducts !== processedProducts.length) {
-          dispatch(setTotalProducts(processedProducts.length));
-        }
+        // Dispatch total count to Redux for the "Showing X products" text
+        dispatch(setTotalProducts(processedProducts.length));
 
-        // 3. Sorting
-        if (sort === "price-asc") {
+        // FIX 3: Sorting and Pagination
+        if (sort === "price-asc")
           processedProducts.sort((a, b) => a.price - b.price);
-        } else if (sort === "price-desc") {
+        if (sort === "price-desc")
           processedProducts.sort((a, b) => b.price - a.price);
-        }
 
-        // 4. Pagination/Limiting
         let sliced = processedProducts;
-        if (limit) {
-          sliced = processedProducts.slice(0, limit);
-        } else if (pageNum) {
-          sliced = processedProducts.slice(0, pageNum * 9);
-        }
+        if (limit) sliced = processedProducts.slice(0, limit);
+        else if (pageNum) sliced = processedProducts.slice(0, pageNum * 9);
 
         setProducts(sliced);
         dispatch(setShowingProducts(sliced.length));
       } catch (error) {
-        console.error("ERROR LOADING PRODUCTS", error);
+        console.error("API Error:", error);
         setProducts([]);
       }
     },
-    [externalProducts, category, totalProducts, dispatch, limit, currentLang]
+    [externalProducts, category, currentLang, dispatch, limit]
   );
 
   // Reload when query, sort, page, OR LANGUAGE changes
