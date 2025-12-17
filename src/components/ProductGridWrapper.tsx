@@ -172,24 +172,21 @@ const ProductGridWrapper = ({
         // Grab the data array from the nested response
         const allProducts = response.data.data || [];
 
-        const categoryFromUrl = params.category; // e.g., "Bosh kiyim"
         let processedProducts = [...allProducts];
 
         if (query) {
           processedProducts = processedProducts.filter((product: any) => {
-            if (!categoryFromUrl || categoryFromUrl === "all") return true;
-
-            const cat = product.category;
-
-            // Compare the URL text to the correct language field in the database
-            const matchUz =
-              cat.title_uz?.toLowerCase() === categoryFromUrl.toLowerCase();
-            const matchRu =
-              cat.title_ru?.toLowerCase() === categoryFromUrl.toLowerCase();
-            const matchEn =
-              cat.title_en?.toLowerCase() === categoryFromUrl.toLowerCase();
-
-            return matchUz || matchRu || matchEn;
+            // Find the title matching the current site language (UZ, RU, EN)
+            product.translations?.some((t: any) =>
+              t.title.toLowerCase().includes(query.toLowerCase())
+            );
+            const translation = product.translations?.find(
+              (t: any) => t.language === currentLang
+            );
+            // Use translated title, or fallback to the first available translation
+            const titleToCompare =
+              translation?.title || product.translations?.[0]?.title || "";
+            return titleToCompare.toLowerCase().includes(query.toLowerCase());
           });
         }
 
