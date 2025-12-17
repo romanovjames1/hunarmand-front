@@ -224,7 +224,6 @@ const Cart = () => {
                   )?.title ||
                   product.translations?.[0]?.title ||
                   "No Title";
-                ("No Title");
 
                 // 2. Ensure price is pulled correctly
                 const displayPrice = product.price || 0;
