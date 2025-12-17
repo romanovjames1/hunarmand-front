@@ -10,8 +10,11 @@ const HomeCollectionSection = () => {
   const { products, loading } = useProducts();
   const { t } = useTranslation();
 
-  const filteredProducts = products.filter(
-    (p) => p.language?.toUpperCase() === selectedLang.toUpperCase()
+  const filteredProducts = products.filter((p) =>
+    // Check if any item in the translations array matches the selected language
+    p.translations?.some(
+      (translation: any) => translation.language === selectedLang.toUpperCase()
+    )
   );
 
   if (loading)
