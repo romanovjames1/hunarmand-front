@@ -107,9 +107,9 @@ const ProductGrid: React.FC<Props> = ({ products = [] }) => {
   return (
     <div className="max-w-screen-2xl flex flex-wrap justify-between items-center gap-y-8 mx-auto mt-12 px-5">
       {products.map((product) => {
-        // Find translation for current language
+        // Find the translation matching current language (e.g., 'UZ')
         const activeTranslation =
-          product.translations?.find((t) => t.language === currentLang) ||
+          product.translations?.find((t: any) => t.language === currentLang) ||
           product.translations?.[0];
 
         // Pick category title based on language

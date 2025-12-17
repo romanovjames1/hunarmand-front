@@ -175,14 +175,11 @@ const ProductGridWrapper = ({
 
         // FIX 1: Search inside the translations array
         if (query) {
-          processedProducts = processedProducts.filter((product: any) => {
-            const translation = product.translations?.find(
-              (t: any) => t.language === currentLang
-            );
-            return translation?.title
-              .toLowerCase()
-              .includes(query.toLowerCase());
-          });
+          processedProducts = allProducts.filter((p: any) =>
+            p.translations?.some((t: any) =>
+              t.title.toLowerCase().includes(query.toLowerCase())
+            )
+          );
         }
 
         // FIX 2: Filter category using the new multi-language keys
