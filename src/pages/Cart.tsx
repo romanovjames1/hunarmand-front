@@ -220,10 +220,11 @@ const Cart = () => {
                 // 1. Get the title based on current language
                 const activeTitle =
                   product.translations?.find(
-                    (t: any) => t.language === currentLang
+                    (t: any) => t.language === i18n.language.toUpperCase()
                   )?.title ||
-                  product.title ||
+                  product.translations?.[0]?.title ||
                   "No Title";
+                ("No Title");
 
                 // 2. Ensure price is pulled correctly
                 const displayPrice = product.price || 0;
