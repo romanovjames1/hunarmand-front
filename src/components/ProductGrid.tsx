@@ -99,6 +99,7 @@ const ProductGrid: React.FC<Props> = ({ products = [] }) => {
   // Match i18next language to your DB "UZ", "RU", "EN"
   const currentLang = i18n.language.toUpperCase();
 
+  console.log(products, "producrts");
   // If the array is empty, it shows the "no_products" message you see now
   if (!products || products.length === 0)
     return <p className="text-center w-full mt-10">no_products</p>;
