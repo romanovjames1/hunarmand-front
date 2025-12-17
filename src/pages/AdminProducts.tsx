@@ -417,6 +417,7 @@ const AdminProducts: React.FC<Props> = ({ token }) => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
+      console.log(catRes.data, "category datat");
       setCategories(catRes.data.data);
     } catch (err) {
       toast.error("Failed to fetch data");
