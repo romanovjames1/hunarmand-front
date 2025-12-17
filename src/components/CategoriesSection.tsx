@@ -2,7 +2,7 @@ import CategoryItem from "./CategoryItem";
 import { useTranslation } from "react-i18next";
 
 const CategoriesSection = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const categories = [
     {
@@ -39,13 +39,12 @@ const CategoriesSection = () => {
         className="flex justify-between max-sm:justify-center max-xl:justify-start 
         max-xl:gap-5  flex-wrap gap-y-10"
       >
-        // Inside your Categories loop
         {categories.map((cat) => (
           <CategoryItem
-            key={cat._id}
+            key={cat.key}
             image={cat.image}
             // Use the ID or a fixed English slug for the URL
-            link={cat.slug || cat._id}
+            link={cat.link || cat._id}
             // Dynamically pick the title based on site language
             categoryTitle={
               i18n.language === "uz"
