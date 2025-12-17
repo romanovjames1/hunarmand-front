@@ -165,6 +165,7 @@ const ProductGridWrapper = ({
   const loadProductsFromAPI = useCallback(
     async (query: string, sort: string, pageNum: number) => {
       if (externalProducts) return;
+      const currentLang = i18n.language.toUpperCase();
 
       try {
         const response = await customFetch("/product");
@@ -177,12 +178,12 @@ const ProductGridWrapper = ({
           processedProducts = processedProducts.filter((product: any) => {
             // Find the title matching the current site language (UZ, RU, EN)
             const translation = product.translations?.find(
-              (t: any) => t.language === currentLang.toUpperCase()
+              (t: any) => t.language === currentLang
             );
             // Use translated title, or fallback to the first available translation
-            const titleToMatch =
+            const titleToCompare =
               translation?.title || product.translations?.[0]?.title || "";
-            return titleToMatch.toLowerCase().includes(query.toLowerCase());
+            return titleToCompare.toLowerCase().includes(query.toLowerCase());
           });
         }
 
@@ -192,15 +193,15 @@ const ProductGridWrapper = ({
             const cat = product.category;
             if (!cat) return false;
 
-            // Compare against the correct language field in the database
-            const catTitle =
+            // Match the clicked category to the correct language field in DB
+            const dbCategoryTitle =
               currentLang === "UZ"
                 ? cat.title_uz
                 : currentLang === "RU"
                 ? cat.title_ru
                 : cat.title_en;
 
-            return catTitle?.toLowerCase() === category.toLowerCase();
+            return dbCategoryTitle?.toLowerCase() === category.toLowerCase();
           });
         }
 
