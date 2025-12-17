@@ -64,7 +64,7 @@ interface Props {
 
 // export default React.memo(ProductGrid);
 
-iimport React from "react";
+import React from "react";
 import ProductItem from "./ProductItem";
 import { useTranslation } from "react-i18next"; // Use the hook you found
 
@@ -72,26 +72,31 @@ import { useTranslation } from "react-i18next"; // Use the hook you found
 
 const ProductGrid: React.FC<Props> = ({ products = [] }) => {
   const { i18n } = useTranslation();
-  
+
   // Normalize language to match your DB ("UZ", "RU", "EN")
-  const currentLang = i18n.language.toUpperCase(); 
+  const currentLang = i18n.language.toUpperCase();
 
   if (!products.length)
     return <p className="text-center w-full mt-10">No products found.</p>;
 
   return (
-    <div id="gridTop" className="max-w-screen-2xl flex flex-wrap justify-between items-center gap-y-8 mx-auto mt-12 px-5">
+    <div
+      id="gridTop"
+      className="max-w-screen-2xl flex flex-wrap justify-between items-center gap-y-8 mx-auto mt-12 px-5"
+    >
       {products.map((product) => {
         // 1. FIND the translation for the current language
-        const activeTranslation = product.translations?.find(
-          (t) => t.language === currentLang
-        ) || product.translations?.[0]; // Fallback if UZ/RU/EN is missing
+        const activeTranslation =
+          product.translations?.find((t) => t.language === currentLang) ||
+          product.translations?.[0]; // Fallback if UZ/RU/EN is missing
 
         // 2. CHOOSE the category translation
-        const categoryTitle = 
-          currentLang === "UZ" ? product.category?.title_uz :
-          currentLang === "RU" ? product.category?.title_ru :
-          product.category?.title_en;
+        const categoryTitle =
+          currentLang === "UZ"
+            ? product.category?.title_uz
+            : currentLang === "RU"
+            ? product.category?.title_ru
+            : product.category?.title_en;
 
         return (
           <ProductItem
@@ -99,7 +104,7 @@ const ProductGrid: React.FC<Props> = ({ products = [] }) => {
             id={product._id}
             image={product.thumbnail || product.images?.[0] || ""}
             title={activeTranslation?.title || "No Title"} // Dynamic Title
-            category={categoryTitle || "Uncategorized"}    // Dynamic Category
+            category={categoryTitle || "Uncategorized"} // Dynamic Category
             price={product.price}
             popularity={product.popularity ?? 0}
             stock={product.stockQuantity}
