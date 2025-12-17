@@ -1,6 +1,24 @@
-import { useTranslation } from "react-i18next"; // Added for language support
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import toast from "react-hot-toast";
 
-// 1. Update the Product Type to match the new structure
+// Project-specific imports
+import { useAppDispatch } from "../hooks";
+import { addProductToTheCart } from "../features/cart/cartSlice";
+import {
+  Button,
+  Dropdown,
+  ProductItem,
+  QuantityInput,
+  StandardSelectInput,
+} from "../components";
+
+// Helper wrappers
+import WithSelectInputWrapper from "../utils/withSelectInputWrapper";
+import WithNumberInputWrapper from "../utils/withNumberInputWrapper";
+
+// 1. Updated Type to match your Backend
 type Product = {
   _id: string;
   translations: {
@@ -13,7 +31,7 @@ type Product = {
   images: string[];
   category: {
     _id: string;
-    title_uz: string; // Updated field names
+    title_uz: string;
     title_ru: string;
     title_en: string;
   };
@@ -23,16 +41,19 @@ type Product = {
 
 const SingleProduct = () => {
   const { t, i18n } = useTranslation();
-  const currentLang = i18n.language.toUpperCase(); // e.g., "UZ"
+  const currentLang = i18n.language.toUpperCase();
+  const dispatch = useAppDispatch();
+  const params = useParams<{ id: string }>();
+
+  // Components using HOCs
+  const SelectInputUpgrade = WithSelectInputWrapper(StandardSelectInput);
+  const QuantityInputUpgrade = WithNumberInputWrapper(QuantityInput);
 
   const [products, setProducts] = useState<Product[]>([]);
   const [singleProduct, setSingleProduct] = useState<Product | null>(null);
   const [size, setSize] = useState<string>("XS");
   const [color, setColor] = useState<string>("black");
   const [quantity, setQuantity] = useState<number>(1);
-
-  const params = useParams<{ id: string }>();
-  const dispatch = useAppDispatch();
 
   // 2. Helper to get the correct translated text
   const activeTranslation =
@@ -48,20 +69,46 @@ const SingleProduct = () => {
       : singleProduct.category.title_en
     : "";
 
+  useEffect(() => {
+    const fetchSingleProduct = async () => {
+      try {
+        const response = await fetch(
+          `https://hunarmand.qaxramonov.uz/product/${params.id}`
+        );
+        const data = await response.json();
+        setSingleProduct(data);
+      } catch (err) {
+        console.error("Fetch single product failed", err);
+      }
+    };
+
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch("https://hunarmand.qaxramonov.uz/product");
+        const data = await response.json();
+        setProducts(data.data || []);
+      } catch (err) {
+        console.error("Fetch products failed", err);
+      }
+    };
+
+    fetchSingleProduct();
+    fetchProducts();
+  }, [params.id]);
+
   const handleAddToCart = () => {
     if (singleProduct && activeTranslation) {
       dispatch(
         addProductToTheCart({
           id: singleProduct._id + size + color,
           image: singleProduct.thumbnail || singleProduct.images?.[0] || "",
-          // FIX: Send the translations array so the Cart can read it
-          translations: singleProduct.translations,
-          title: activeTranslation.title, // Also send a flat title for safety
+          translations: singleProduct.translations, // CRITICAL: Pass translations for Cart
+          title: activeTranslation.title,
           price: singleProduct.price,
           quantity,
           size,
           color,
-          stockQuantity: singleProduct.stockQuantity, // Corrected field name
+          stockQuantity: singleProduct.stockQuantity, // Corrected from .stock
         })
       );
       toast.success(t("cart.addedSuccess"));
@@ -69,17 +116,18 @@ const SingleProduct = () => {
   };
 
   return (
-    <div className="max-w-screen-2xl mx-auto px-5">
+    <div className="max-w-screen-2xl mx-auto px-5 max-[400px]:px-3">
       <div className="grid grid-cols-3 gap-x-8 max-lg:grid-cols-1">
         <div className="lg:col-span-2">
           <img
             src={singleProduct?.thumbnail || singleProduct?.images?.[0] || ""}
             alt={activeTranslation?.title}
+            className="w-full h-auto"
           />
         </div>
+
         <div className="w-full flex flex-col gap-5 mt-9">
           <div className="flex flex-col gap-2">
-            {/* FIX: Use Translated Title */}
             <h1 className="text-4xl">
               {activeTranslation?.title || "Loading..."}
             </h1>
@@ -87,6 +135,35 @@ const SingleProduct = () => {
               <p className="text-base text-secondaryBrown">{categoryTitle}</p>
               <p className="text-base font-bold">${singleProduct?.price}</p>
             </div>
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <SelectInputUpgrade
+              selectList={[
+                { id: "xs", value: "XS" },
+                { id: "sm", value: "SM" },
+                { id: "m", value: "M" },
+                { id: "lg", value: "LG" },
+                { id: "xl", value: "XL" },
+                { id: "2xl", value: "2XL" },
+              ]}
+              value={size}
+              onChange={(e: any) => setSize(e.target.value)}
+            />
+            <SelectInputUpgrade
+              selectList={[
+                { id: "black", value: "BLACK" },
+                { id: "red", value: "RED" },
+                { id: "blue", value: "BLUE" },
+                { id: "white", value: "WHITE" },
+              ]}
+              value={color}
+              onChange={(e: any) => setColor(e.target.value)}
+            />
+            <QuantityInputUpgrade
+              value={quantity}
+              onChange={(e: any) => setQuantity(parseInt(e.target.value))}
+            />
           </div>
 
           <div className="flex flex-col gap-3">
@@ -97,12 +174,39 @@ const SingleProduct = () => {
             />
           </div>
 
-          {/* FIX: Use Translated Description */}
           <Dropdown dropdownTitle={t("product.description")}>
             {activeTranslation?.description}
           </Dropdown>
         </div>
       </div>
+
+      {/* Similar Products Section */}
+      <div>
+        <h2 className="text-black/90 text-5xl mt-24 mb-12 text-center max-lg:text-4xl">
+          Similar Products
+        </h2>
+        <div className="flex flex-wrap justify-between items-center gap-y-8 mt-12">
+          {products.slice(0, 3).map((product) => {
+            const simTranslation =
+              product.translations?.find((t) => t.language === currentLang) ||
+              product.translations?.[0];
+            return (
+              <ProductItem
+                key={product._id}
+                id={product._id}
+                image={product.thumbnail || product.images?.[0] || ""}
+                title={simTranslation?.title || "No Title"}
+                category={product.category}
+                price={product.price}
+                stock={product.stockQuantity}
+                popularity={product.popularity ?? 0}
+              />
+            );
+          })}
+        </div>
+      </div>
     </div>
   );
 };
+
+export default SingleProduct;
