@@ -173,22 +173,26 @@ const ProductGridWrapper = ({
 
         let processedProducts = [...allProducts];
 
-        // FIX 1: Search inside the translations array
         if (query) {
-          processedProducts = allProducts.filter((p: any) =>
-            p.translations?.some((t: any) =>
-              t.title.toLowerCase().includes(query.toLowerCase())
-            )
-          );
+          processedProducts = processedProducts.filter((product: any) => {
+            // Find the title matching the current site language (UZ, RU, EN)
+            const translation = product.translations?.find(
+              (t: any) => t.language === currentLang.toUpperCase()
+            );
+            // Use translated title, or fallback to the first available translation
+            const titleToMatch =
+              translation?.title || product.translations?.[0]?.title || "";
+            return titleToMatch.toLowerCase().includes(query.toLowerCase());
+          });
         }
 
-        // FIX 2: Filter category using the new multi-language keys
+        // 3. Fix Category filtering for the images like "Bosh kiyim"
         if (category && category !== "all") {
           processedProducts = processedProducts.filter((product: any) => {
             const cat = product.category;
             if (!cat) return false;
 
-            // Match the filter to the current site language
+            // Compare against the correct language field in the database
             const catTitle =
               currentLang === "UZ"
                 ? cat.title_uz
@@ -199,6 +203,8 @@ const ProductGridWrapper = ({
             return catTitle?.toLowerCase() === category.toLowerCase();
           });
         }
+
+        setProducts(processedProducts);
 
         // Dispatch total count to Redux for the "Showing X products" text
         dispatch(setTotalProducts(processedProducts.length));
