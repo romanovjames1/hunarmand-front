@@ -177,6 +177,9 @@ const ProductGridWrapper = ({
         if (query) {
           processedProducts = processedProducts.filter((product: any) => {
             // Find the title matching the current site language (UZ, RU, EN)
+            product.translations?.some((t: any) =>
+              t.title.toLowerCase().includes(query.toLowerCase())
+            );
             const translation = product.translations?.find(
               (t: any) => t.language === currentLang
             );

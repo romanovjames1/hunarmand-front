@@ -104,5 +104,6 @@
     "viewMore": "Ko'proq ko'rish",
     "backToTop": "Tepaga qaytish"
   },
-  "no_products": "Mahsulotlar topilmadi"
+  "no_products": "Mahsulotlar topilmadi",
+  "loading": "Mahsulotlar yuklanmoqda..."
 }
