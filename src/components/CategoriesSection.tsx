@@ -2,7 +2,7 @@ import CategoryItem from "./CategoryItem";
 import { useTranslation } from "react-i18next";
 
 const CategoriesSection = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const categories = [
     {
@@ -42,17 +42,9 @@ const CategoriesSection = () => {
         {categories.map((cat) => (
           <CategoryItem
             key={cat.key}
+            categoryTitle={t(`categories.items.${cat.key}`)}
             image={cat.image}
-            // Use the ID or a fixed English slug for the URL
-            link={cat.link || cat._id}
-            // Dynamically pick the title based on site language
-            categoryTitle={
-              i18n.language === "uz"
-                ? cat.title_uz
-                : i18n.language === "ru"
-                ? cat.title_ru
-                : cat.title_en
-            }
+            link={cat.link}
           />
         ))}
       </div>
