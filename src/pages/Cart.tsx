@@ -217,103 +217,45 @@ const Cart = () => {
               className="divide-y divide-gray-200 border-b border-t border-gray-200"
             >
               {productsInCart.map((product) => {
-                // 1. DYNAMIC TITLE LOGIC
-                // Find the translation in the cart object or fallback to the .title property
+                // 1. Get the title based on current language
                 const activeTitle =
                   product.translations?.find(
-                    (trans: any) => trans.language === currentLang
-                  )?.title || product.title;
+                    (t: any) => t.language === currentLang
+                  )?.title ||
+                  product.title ||
+                  "No Title";
+
+                // 2. Ensure price is pulled correctly
+                const displayPrice = product.price || 0;
 
                 return (
-                  <li key={product.id} className="flex py-6 sm:py-10">
-                    <div className="flex-shrink-0">
-                      <img
-                        src={product.image}
-                        alt={activeTitle}
-                        className="h-24 w-24 object-cover object-center sm:h-48 sm:w-48 rounded-md"
-                      />
-                    </div>
+                  <li key={product.id} className="flex py-6">
+                    {/* Product Image */}
+                    <img
+                      src={product.image}
+                      alt={activeTitle}
+                      className="h-24 w-24 object-cover"
+                    />
 
-                    <div className="ml-4 flex flex-1 flex-col justify-between sm:ml-6">
-                      <div className="relative pr-9 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:pr-0">
-                        <div>
-                          <div className="flex justify-between">
-                            <h3 className="text-sm">
-                              <Link
-                                to={`/product/${product.id}`}
-                                className="font-medium text-gray-700 hover:text-secondaryBrown transition-colors"
-                              >
-                                {activeTitle} {/* Updated to dynamic title */}
-                              </Link>
-                            </h3>
-                          </div>
-
-                          <p className="mt-1 text-sm font-medium text-gray-900">
-                            ${product.price}
-                          </p>
-                        </div>
-
-                        <div className="mt-4 sm:mt-0 sm:pr-9">
-                          <label
-                            htmlFor={`quantity-${product.id}`}
-                            className="mr-2 text-sm text-gray-600"
-                          >
-                            {t("cart.quantity")}:
-                          </label>
-
-                          <input
-                            type="number"
-                            id={`quantity-${product.id}`}
-                            min="1"
-                            className="w-16 h-8 indent-1 bg-white border rounded-md outline-none focus:ring-1 focus:ring-secondaryBrown"
-                            value={product.quantity}
-                            onChange={(e) => {
-                              const val = parseInt(e.target.value);
-                              if (val > 0) {
-                                dispatch(
-                                  updateProductQuantity({
-                                    id: product.id,
-                                    quantity: val,
-                                  })
-                                );
-                              }
-                            }}
-                          />
-
-                          <div className="absolute right-0 top-0">
-                            <button
-                              type="button"
-                              className="-m-2 inline-flex p-2 text-gray-400 hover:text-red-500 transition-colors"
-                              onClick={() => {
-                                dispatch(
-                                  removeProductFromTheCart({ id: product.id })
-                                );
-                                toast.error(t("cart.remove"));
-                              }}
-                            >
-                              <span className="sr-only">
-                                {t("cart.remove")}
-                              </span>
-                              <XMarkIcon
-                                className="h-5 w-5"
-                                aria-hidden="true"
-                              />
-                            </button>
-                          </div>
-                        </div>
+                    <div className="ml-4 flex flex-1 flex-col">
+                      <div>
+                        {/* Display the Translated Title */}
+                        <h3 className="text-sm font-medium">{activeTitle}</h3>
+                        <p className="mt-1 text-sm text-gray-900">
+                          ${displayPrice}
+                        </p>
                       </div>
 
-                      <p className="mt-4 flex space-x-2 text-sm text-gray-700">
+                      {/* Check stockQuantity instead of stock */}
+                      <p className="mt-4 text-sm">
                         {product.stockQuantity > 0 ? (
-                          <>
-                            <CheckIcon className="h-5 w-5 text-green-500" />
-                            <span>{t("cart.inStock")}</span>
-                          </>
+                          <span className="text-green-600">
+                            {t("cart.inStock")}
+                          </span>
                         ) : (
-                          <>
-                            <XMarkIcon className="h-5 w-5 text-red-600" />
-                            <span>{t("cart.outOfStock")}</span>
-                          </>
+                          <span className="text-red-600">
+                            {t("cart.outOfStock")}
+                          </span>
                         )}
                       </p>
                     </div>
