@@ -192,138 +192,79 @@ import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 
 const Cart = () => {
-  const { t, i18n } = useTranslation(); // Added i18n to track language
+  const { t, i18n } = useTranslation();
   const { productsInCart, subtotal } = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
 
-  // Normalize current language (UZ, RU, EN)
+  // Get current language (UZ, RU, or EN)
   const currentLang = i18n.language.toUpperCase();
 
   return (
-    <div className="bg-white mx-auto max-w-screen-2xl px-5 max-[400px]:px-3">
-      <div className="pb-24 pt-16">
-        <h1 className="text-3xl tracking-tight text-gray-900 sm:text-4xl">
-          {t("cart.shoppingCart")}
-        </h1>
+    // ... container code
+    <ul role="list" className="divide-y divide-gray-200">
+      {productsInCart.map((product) => {
+        // EXACT FIX: Find the title in the translations array
+        const activeTranslation = product.translations?.find(
+          (trans: any) => trans.language === currentLang
+        );
 
-        <form className="mt-12 lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-12 xl:gap-x-16">
-          <section aria-labelledby="cart-heading" className="lg:col-span-7">
-            <h2 id="cart-heading" className="sr-only">
-              {t("cart.itemsInCart")}
-            </h2>
+        // Fallback to the first translation if current language is not found
+        const displayTitle =
+          activeTranslation?.title ||
+          product.translations?.[0]?.title ||
+          "No Title";
 
-            <ul
-              role="list"
-              className="divide-y divide-gray-200 border-b border-t border-gray-200"
-            >
-              {productsInCart.map((product) => {
-                // 1. Get the title based on current language
-                const activeTitle =
-                  product.translations?.find(
-                    (t: any) => t.language === i18n.language.toUpperCase()
-                  )?.title ||
-                  product.translations?.[0]?.title ||
-                  "No Title";
+        return (
+          <li key={product.id} className="flex py-6">
+            <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border">
+              <img
+                src={product.image}
+                alt={displayTitle}
+                className="h-full w-full object-cover"
+              />
+            </div>
 
-                // 2. Ensure price is pulled correctly
-                const displayPrice = product.price || 0;
-
-                return (
-                  <li key={product.id} className="flex py-6">
-                    {/* Product Image */}
-                    <img
-                      src={product.image}
-                      alt={activeTitle}
-                      className="h-24 w-24 object-cover"
-                    />
-
-                    <div className="ml-4 flex flex-1 flex-col">
-                      <div>
-                        {/* Display the Translated Title */}
-                        <h3 className="text-sm font-medium">{activeTitle}</h3>
-                        <p className="mt-1 text-sm text-gray-900">
-                          ${displayPrice}
-                        </p>
-                      </div>
-
-                      {/* Check stockQuantity instead of stock */}
-                      <p className="mt-4 text-sm">
-                        {product.stockQuantity > 0 ? (
-                          <span className="text-green-600">
-                            {t("cart.inStock")}
-                          </span>
-                        ) : (
-                          <span className="text-red-600">
-                            {t("cart.outOfStock")}
-                          </span>
-                        )}
-                      </p>
-                    </div>
-                  </li>
-                );
-              })}
-            </ul>
-          </section>
-
-          {/* Order Summary */}
-          <section className="mt-16 bg-gray-50 px-4 py-6 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-8 rounded-lg">
-            <h2 className="text-lg font-medium text-gray-900 border-b pb-4">
-              {t("cart.orderSummary")}
-            </h2>
-
-            <dl className="mt-6 space-y-4">
-              <div className="flex items-center justify-between">
-                <dt className="text-sm text-gray-600">{t("cart.subtotal")}</dt>
-                <dd className="text-sm font-medium text-gray-900">
-                  ${subtotal}
-                </dd>
+            <div className="ml-4 flex flex-1 flex-col">
+              <div>
+                <div className="flex justify-between text-base font-medium text-gray-900">
+                  <h3>{displayTitle}</h3> {/* Displaying dynamic title */}
+                  <p className="ml-4">${product.price}</p>
+                </div>
               </div>
 
-              <div className="flex items-center justify-between border-t border-gray-200 pt-4">
-                <dt className="text-sm text-gray-600">
-                  {t("cart.shippingEstimate")}
-                </dt>
-                <dd className="text-sm font-medium text-gray-900">
-                  ${subtotal === 0 ? 0 : 5}
-                </dd>
-              </div>
-
-              <div className="flex items-center justify-between border-t border-gray-200 pt-4">
-                <dt className="text-sm text-gray-600">
-                  {t("cart.taxEstimate")}
-                </dt>
-                <dd className="text-sm font-medium text-gray-900">
-                  ${(subtotal * 0.2).toFixed(2)}
-                </dd>
-              </div>
-
-              <div className="flex items-center justify-between border-t border-gray-200 pt-4">
-                <dt className="text-base font-medium text-gray-900">
-                  {t("cart.orderTotal")}
-                </dt>
-                <dd className="text-base font-medium text-gray-900">
-                  $
-                  {subtotal === 0
-                    ? 0
-                    : (subtotal + subtotal * 0.2 + 5).toFixed(2)}
-                </dd>
-              </div>
-            </dl>
-
-            {productsInCart.length > 0 && (
-              <div className="mt-6">
-                <Link
-                  to="/checkout"
-                  className="text-white bg-secondaryBrown hover:bg-opacity-90 transition-all text-center text-xl font-normal tracking-wide w-full h-12 flex items-center justify-center rounded shadow-sm"
+              <div className="flex flex-1 items-end justify-between text-sm">
+                {/* EXACT FIX: Check stockQuantity instead of stock */}
+                <p
+                  className={`${
+                    product.stockQuantity > 0
+                      ? "text-green-600"
+                      : "text-red-600"
+                  }`}
                 >
-                  {t("cart.checkout")}
-                </Link>
+                  {product.stockQuantity > 0
+                    ? t("cart.inStock")
+                    : t("cart.outOfStock")}
+                </p>
+
+                <div className="flex">
+                  <button
+                    type="button"
+                    onClick={() =>
+                      dispatch(removeProductFromTheCart({ id: product.id }))
+                    }
+                    className="font-medium text-secondaryBrown hover:text-opacity-80"
+                  >
+                    {t("cart.remove")}
+                  </button>
+                </div>
               </div>
-            )}
-          </section>
-        </form>
-      </div>
-    </div>
+            </div>
+          </li>
+        );
+      })}
+    </ul>
+
+    // ... order summary code
   );
 };
 
