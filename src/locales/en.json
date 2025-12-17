@@ -97,5 +97,12 @@
   "product": {
     "description": "Description",
     "details": "Product description"
-  }
+  },
+  "pagination": {
+    "showing": "Showing",
+    "of": "of",
+    "viewMore": "View More",
+    "backToTop": "Back to Top"
+  },
+  "no_products": "No products found"
 }

@@ -97,5 +97,12 @@
   "product": {
     "description": "Описание",
     "details": "Детали продукта"
-  }
+  },
+  "pagination": {
+    "showing": "Показано",
+    "of": "из",
+    "viewMore": "Показать еще",
+    "backToTop": "Вернуться наверх"
+  },
+  "no_products": "Товары не найдены"
 }

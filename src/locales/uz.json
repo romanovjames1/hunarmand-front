@@ -97,5 +97,12 @@
   "product": {
     "description": "Tavsif",
     "details": "Mahsulot tafsilotlari"
-  }
+  },
+  "pagination": {
+    "showing": "Ko'rsatilmoqda",
+    "of": "dan",
+    "viewMore": "Ko'proq ko'rish",
+    "backToTop": "Tepaga qaytish"
+  },
+  "no_products": "Mahsulotlar topilmadi"
 }
