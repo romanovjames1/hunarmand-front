@@ -68,7 +68,6 @@ import React from "react";
 import ProductItem from "./ProductItem";
 import { useTranslation } from "react-i18next";
 
-// Define the translation structure specifically
 type Translation = {
   language: string;
   title: string;
@@ -77,7 +76,7 @@ type Translation = {
 
 type Product = {
   _id: string;
-  translations: Translation[]; // CRITICAL: You must add this field here!
+  translations: Translation[]; // Must be here to match your API!
   price: number;
   thumbnail: string;
   images: string[];
@@ -97,25 +96,22 @@ interface Props {
 
 const ProductGrid: React.FC<Props> = ({ products = [] }) => {
   const { i18n } = useTranslation();
-
-  // Normalize language (e.g., "uz" -> "UZ") to match the 'language' field in your DB
+  // Match i18next language to your DB "UZ", "RU", "EN"
   const currentLang = i18n.language.toUpperCase();
 
-  if (!products.length)
-    return <p className="text-center w-full mt-10">No products found.</p>;
+  // If the array is empty, it shows the "no_products" message you see now
+  if (!products || products.length === 0)
+    return <p className="text-center w-full mt-10">no_products</p>;
 
   return (
-    <div
-      id="gridTop"
-      className="max-w-screen-2xl flex flex-wrap justify-between items-center gap-y-8 mx-auto mt-12 px-5"
-    >
+    <div className="max-w-screen-2xl flex flex-wrap justify-between items-center gap-y-8 mx-auto mt-12 px-5">
       {products.map((product) => {
-        // 1. Get the title from the translations array based on i18n language
+        // Find translation for current language
         const activeTranslation =
           product.translations?.find((t) => t.language === currentLang) ||
           product.translations?.[0];
 
-        // 2. Map category fields to the current language
+        // Pick category title based on language
         const categoryTitle =
           currentLang === "UZ"
             ? product.category?.title_uz
