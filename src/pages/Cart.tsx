@@ -62,13 +62,34 @@ const Cart = () => {
                                 to={`/product/${product.id}`}
                                 className="font-medium text-gray-700 hover:text-gray-800"
                               >
-                                {activeTitle}
+                                {product.title}
                               </Link>
                             </h3>
                           </div>
+
                           <p className="mt-1 text-sm font-medium text-gray-900">
-                            ${displayPrice}
+                            ${product.price}
                           </p>
+
+                          {/* INSERT STATIC SIZE AND COLOR LOGIC HERE */}
+                          <div className="mt-1 flex flex-col gap-1">
+                            {product.size && (
+                              <p className="text-xs text-gray-500">
+                                <span className="font-bold">
+                                  {t("product.size")}:
+                                </span>{" "}
+                                {product.size}
+                              </p>
+                            )}
+                            {product.color && (
+                              <p className="text-xs text-gray-500">
+                                <span className="font-bold">
+                                  {t("product.color")}:
+                                </span>{" "}
+                                {product.color}
+                              </p>
+                            )}
+                          </div>
                         </div>
 
                         <div className="mt-4 sm:mt-0 sm:pr-9">
