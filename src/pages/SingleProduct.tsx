@@ -139,83 +139,44 @@ const SingleProduct = () => {
               <p className="text-base font-bold">${singleProduct?.price}</p>
             </div>
           </div>
-          return (
-          <div className="max-w-screen-2xl mx-auto px-5 max-[400px]:px-3">
-            <div className="grid grid-cols-3 gap-x-8 max-lg:grid-cols-1">
-              <div className="lg:col-span-2">
-                <img
-                  src={
-                    singleProduct?.thumbnail || singleProduct?.images?.[0] || ""
-                  }
-                  alt={activeTranslation?.title}
-                  className="w-full h-auto"
-                />
+          {/* 1. Insert Size and Color Selectors here */}
+          <div className="flex flex-col gap-4 mb-2">
+            {/* Size Selector - */}
+            {singleProduct?.sizes && singleProduct.sizes.length > 0 && (
+              <div className="flex flex-col gap-1">
+                <label className="text-xs text-gray-400 uppercase">Size</label>
+                <select
+                  className="w-full border border-gray-300 p-2 text-sm"
+                  value={selectedSize}
+                  onChange={(e) => setSelectedSize(e.target.value)}
+                >
+                  {singleProduct.sizes.map((size: string) => (
+                    <option key={size} value={size}>
+                      {size}
+                    </option>
+                  ))}
+                </select>
               </div>
+            )}
 
-              <div className="w-full flex flex-col gap-5 mt-9">
-                <div className="flex flex-col gap-2">
-                  {/* Dynamic Title from Database */}
-                  <h1 className="text-4xl">
-                    {activeTranslation?.title || "Yuklanmoqda..."}
-                  </h1>
-
-                  <div className="flex justify-between items-center">
-                    {/* Dynamic Category */}
-                    <p className="text-base text-secondaryBrown">
-                      {categoryTitle}
-                    </p>
-                    <p className="text-base font-bold">
-                      ${singleProduct?.price}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Button with Static Translation */}
-                <div className="flex flex-col gap-3">
-                  <Button
-                    mode="brown"
-                    text={t("cart.addToCart")}
-                    onClick={handleAddToCart}
-                  />
-                </div>
-
-                {/* Description with Static Title and Dynamic Content */}
-                <Dropdown dropdownTitle={t("product.description")}>
-                  <p className="text-gray-600 leading-relaxed">
-                    {activeTranslation?.description}
-                  </p>
-                </Dropdown>
+            {/* Color Selector - */}
+            {singleProduct?.colors && singleProduct.colors.length > 0 && (
+              <div className="flex flex-col gap-1">
+                <label className="text-xs text-gray-400 uppercase">Color</label>
+                <select
+                  className="w-full border border-gray-300 p-2 text-sm"
+                  value={selectedColor}
+                  onChange={(e) => setSelectedColor(e.target.value)}
+                >
+                  {singleProduct.colors.map((color: string) => (
+                    <option key={color} value={color}>
+                      {color}
+                    </option>
+                  ))}
+                </select>
               </div>
-            </div>
-
-            {/* Similar Products Section */}
-            <div>
-              <h2 className="text-black/90 text-5xl mt-24 mb-12 text-center max-lg:text-4xl">
-                Similar Products
-              </h2>
-              <div className="flex flex-wrap justify-between items-center gap-y-8 mt-12">
-                {products.slice(0, 3).map((product) => {
-                  const simTranslation =
-                    product.translations?.find(
-                      (t) => t.language === currentLang
-                    ) || product.translations?.[0];
-                  return (
-                    <ProductItem
-                      key={product._id}
-                      id={product._id}
-                      image={product.thumbnail || product.images?.[0] || ""}
-                      title={simTranslation?.title || "No Title"}
-                      category={product.category}
-                      price={product.price}
-                      stock={product.stockQuantity}
-                      popularity={product.popularity ?? 0}
-                    />
-                  );
-                })}
-              </div>
-            </div>
+            )}
           </div>
-          );
           {/* Button with Static Translation */}
           <div className="flex flex-col gap-3">
             <Button
@@ -224,6 +185,7 @@ const SingleProduct = () => {
               onClick={handleAddToCart}
             />
           </div>
+
           {/* Description with Static Title and Dynamic Content */}
           <Dropdown dropdownTitle={t("product.description")}>
             <p className="text-gray-600 leading-relaxed">
