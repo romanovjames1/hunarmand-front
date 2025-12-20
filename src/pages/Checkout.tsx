@@ -39,12 +39,19 @@ const Checkout = () => {
     message += `Phone: ${formData.phone}\n`;
     message += `Address: ${formData.address}, Apt: ${formData.apartment}, City: ${formData.city}, State: ${formData.state}, Postal: ${formData.postalCode}\n\n`;
     message += `Products:\n`;
+
     productsInCart.forEach((p) => {
-      message += `- ${p.title} | Qty: ${p.quantity} | Price: $${
-        p.price
-      } | Total: $${p.price * p.quantity}\n`;
+      message += `- ${p.title}\n`;
+      // --- NEW LOGIC ADDED BELOW ---
+      message += `  🎨 Color: ${p.color || "N/A"}\n`; //
+      message += `  📏 Size: ${p.size || "N/A"}\n`; //
+      // --- END OF NEW LOGIC ---
+      message += `  Qty: ${p.quantity} | Price: $${p.price} | Total: $${
+        p.price * p.quantity
+      }\n\n`;
     });
-    message += `\nSubtotal: $${subtotal}`;
+
+    message += `Subtotal: $${subtotal}`;
     message += `\nShipping: $${subtotal ? 5 : 0}`;
     message += `\nTax: $${subtotal ? subtotal / 5 : 0}`;
     message += `\nTotal: $${subtotal ? subtotal + 5 + subtotal / 5 : 0}`;
