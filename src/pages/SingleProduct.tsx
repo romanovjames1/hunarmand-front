@@ -146,7 +146,9 @@ const SingleProduct = () => {
             {/* Size Display - Since it's a single string, we just show it */}
             {singleProduct?.size && (
               <div className="flex flex-col gap-1">
-                <label className="text-xs text-gray-400 uppercase">Size</label>
+                <label className="text-xs text-gray-400 uppercase font-bold">
+                  {t("product.size")} {/* This makes "SIZE" translate */}
+                </label>
                 <div className="w-full border border-gray-300 p-2 text-sm bg-gray-50">
                   {singleProduct.size}
                 </div>
@@ -156,7 +158,9 @@ const SingleProduct = () => {
             {/* Color Display - */}
             {singleProduct?.color && (
               <div className="flex flex-col gap-1">
-                <label className="text-xs text-gray-400 uppercase">Color</label>
+                <label className="text-xs text-gray-400 uppercase font-bold">
+                  {t("product.color")} {/* This makes "COLOR" translate */}
+                </label>
                 <div className="w-full border border-gray-300 p-2 text-sm bg-gray-50 capitalize">
                   {singleProduct.color}
                 </div>
