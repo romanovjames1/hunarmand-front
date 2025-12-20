@@ -97,8 +97,7 @@
   "product": {
     "description": "Описание",
     "details": "Детали продукта",
-  "similarProducts": "Похожие товары"
-
+    "similarProducts": "Похожие товары"
   },
   "pagination": {
     "showing": "Показано",
@@ -107,5 +106,5 @@
     "backToTop": "Вернуться наверх"
   },
   "no_products": "Товары не найдены",
-  "loading": "Загрузка товаров...",
+  "loading": "Загрузка товаров..."
 }
