@@ -96,7 +96,8 @@
 
   "product": {
     "description": "Description",
-    "details": "Product description"
+    "details": "Product description",
+    "similarProducts": "Similar Products"
   },
   "pagination": {
     "showing": "Showing",
@@ -104,6 +105,5 @@
     "viewMore": "View More",
     "backToTop": "Back to Top"
   },
-  "no_products": "No products found",
-  "similarProducts": "Similar Products"
+  "no_products": "No products found"
 }

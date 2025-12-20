@@ -50,7 +50,6 @@
   },
 
   "cart": {
-    "shoppingCart": "Savatcha",
     "itemsInCart": "Savatchangizdagi mahsulotlar",
     "quantity": "Soni",
     "remove": "O‘chirish",
@@ -96,7 +95,8 @@
   },
   "product": {
     "description": "Tavsif",
-    "details": "Mahsulot tafsilotlari"
+    "details": "Mahsulot tafsilotlari",
+    "similarProducts": "O'xshash mahsulotlar"
   },
   "pagination": {
     "showing": "Ko'rsatilmoqda",
