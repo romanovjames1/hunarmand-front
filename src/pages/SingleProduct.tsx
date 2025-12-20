@@ -132,6 +132,37 @@ const SingleProduct = () => {
             <h1 className="text-4xl">
               {activeTranslation?.title || "Yuklanmoqda..."}
             </h1>
+            <div className="flex flex-col gap-5">
+              {/* Check if sizes exist before rendering */}
+              {singleProduct?.sizes && singleProduct.sizes.length > 0 && (
+                <select
+                  value={selectedSize}
+                  onChange={(e) => setSelectedSize(e.target.value)}
+                  className="border p-2 w-full"
+                >
+                  {singleProduct.sizes.map((size: string) => (
+                    <option key={size} value={size}>
+                      {size}
+                    </option>
+                  ))}
+                </select>
+              )}
+
+              {/* Check if colors exist before rendering */}
+              {singleProduct?.colors && singleProduct.colors.length > 0 && (
+                <select
+                  value={selectedColor}
+                  onChange={(e) => setSelectedColor(e.target.value)}
+                  className="border p-2 w-full"
+                >
+                  {singleProduct.colors.map((color: string) => (
+                    <option key={color} value={color}>
+                      {color}
+                    </option>
+                  ))}
+                </select>
+              )}
+            </div>
 
             <div className="flex justify-between items-center">
               {/* Dynamic Category */}
