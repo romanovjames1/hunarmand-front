@@ -105,5 +105,6 @@
     "backToTop": "Tepaga qaytish"
   },
   "no_products": "Mahsulotlar topilmadi",
-  "loading": "Mahsulotlar yuklanmoqda..."
+  "loading": "Mahsulotlar yuklanmoqda...",
+  "similarProducts": "O'xshash mahsulotlar"
 }

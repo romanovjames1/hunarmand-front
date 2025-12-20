@@ -28,6 +28,8 @@ type Product = {
   }[];
   price: number;
   thumbnail: string;
+  size: string; // Changed from sizes: string[]
+  color: string;
   images: string[];
   category: {
     _id: string;
@@ -141,39 +143,23 @@ const SingleProduct = () => {
           </div>
           {/* 1. Insert Size and Color Selectors here */}
           <div className="flex flex-col gap-4 mb-2">
-            {/* Size Selector - */}
-            {singleProduct?.sizes && singleProduct.sizes.length > 0 && (
+            {/* Size Display - Since it's a single string, we just show it */}
+            {singleProduct?.size && (
               <div className="flex flex-col gap-1">
                 <label className="text-xs text-gray-400 uppercase">Size</label>
-                <select
-                  className="w-full border border-gray-300 p-2 text-sm"
-                  value={selectedSize}
-                  onChange={(e) => setSelectedSize(e.target.value)}
-                >
-                  {singleProduct.sizes.map((size: string) => (
-                    <option key={size} value={size}>
-                      {size}
-                    </option>
-                  ))}
-                </select>
+                <div className="w-full border border-gray-300 p-2 text-sm bg-gray-50">
+                  {singleProduct.size}
+                </div>
               </div>
             )}
 
-            {/* Color Selector - */}
-            {singleProduct?.colors && singleProduct.colors.length > 0 && (
+            {/* Color Display - */}
+            {singleProduct?.color && (
               <div className="flex flex-col gap-1">
                 <label className="text-xs text-gray-400 uppercase">Color</label>
-                <select
-                  className="w-full border border-gray-300 p-2 text-sm"
-                  value={selectedColor}
-                  onChange={(e) => setSelectedColor(e.target.value)}
-                >
-                  {singleProduct.colors.map((color: string) => (
-                    <option key={color} value={color}>
-                      {color}
-                    </option>
-                  ))}
-                </select>
+                <div className="w-full border border-gray-300 p-2 text-sm bg-gray-50 capitalize">
+                  {singleProduct.color}
+                </div>
               </div>
             )}
           </div>
@@ -198,7 +184,7 @@ const SingleProduct = () => {
       {/* Similar Products Section */}
       <div>
         <h2 className="text-black/90 text-5xl mt-24 mb-12 text-center max-lg:text-4xl">
-          Similar Products
+          {t("product.similarProducts")}
         </h2>
         <div className="flex flex-wrap justify-between items-center gap-y-8 mt-12">
           {products.slice(0, 3).map((product) => {
