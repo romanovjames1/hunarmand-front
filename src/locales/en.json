@@ -97,7 +97,9 @@
   "product": {
     "description": "Description",
     "details": "Product description",
-    "similarProducts": "Similar Products"
+    "similarProducts": "Similar Products",
+    "size": "Size",
+    "color": "Color"
   },
   "pagination": {
     "showing": "Showing",
